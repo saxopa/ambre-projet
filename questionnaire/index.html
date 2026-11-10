@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Votre projet · Questionnaire</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#1c120d">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;1,9..144,300&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#1c120d; --ink:#fbf0e4; --ink2:#e3cdb9; --ink3:#b89c86;
+  --glass:rgba(255,222,190,.08); --glass2:rgba(255,226,198,.16);
+  --line:rgba(255,214,176,.22); --line2:rgba(255,236,214,.45);
+  --amber:#f2a65a; --coral:#e9775f; --sand:#f6d3a1;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font:400 16px/1.5 Manrope,system-ui,sans-serif;min-height:100vh;min-height:100dvh;overflow-x:hidden}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:50;opacity:.12;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.orbs{position:fixed;inset:0;overflow:hidden;z-index:0;pointer-events:none}
+.orbs i{position:absolute;border-radius:50%;filter:blur(90px);transition:transform 1.6s cubic-bezier(.2,.8,.2,1)}
+.orbs i:nth-child(1){width:560px;height:560px;background:#c9672f;top:-200px;left:-160px;opacity:.5}
+.orbs i:nth-child(2){width:480px;height:480px;background:#a4485a;bottom:-220px;right:-140px;opacity:.42}
+.orbs i:nth-child(3){width:300px;height:300px;background:#e6a45c;top:45%;left:60%;opacity:.22}
+
+.shell{position:relative;z-index:1;max-width:660px;margin:0 auto;padding:22px 16px 40px;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column}
+.top{display:flex;align-items:center;gap:14px;margin-bottom:28px}
+.brand{font-family:Fraunces,Georgia,serif;font-size:15px;color:var(--sand);white-space:nowrap}
+.bar{flex:1;height:6px;border-radius:6px;background:rgba(255,230,200,.1);overflow:hidden}
+.bar span{display:block;height:100%;width:0;border-radius:6px;background:linear-gradient(90deg,var(--sand),var(--amber),var(--coral));transition:width .6s cubic-bezier(.2,.8,.2,1);box-shadow:0 0 12px var(--amber)}
+.count{font-size:12px;color:var(--ink3);min-width:44px;text-align:right}
+
+.card{flex:1;display:flex;flex-direction:column;padding:30px 24px 24px;border-radius:32px;
+  background:linear-gradient(160deg,rgba(255,232,208,.14),rgba(255,206,170,.04));border:1px solid var(--line);
+  backdrop-filter:blur(22px) saturate(140%);-webkit-backdrop-filter:blur(22px) saturate(140%);
+  box-shadow:inset 0 1px 0 rgba(255,244,230,.25),0 30px 70px -30px rgba(0,0,0,.7)}
+@media (min-width:600px){.card{padding:40px 38px 30px}}
+.q{animation:in .5s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.chap{font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--sand);opacity:.85;margin-bottom:12px}
+h1{font-family:Fraunces,Georgia,serif;font-weight:300;font-size:clamp(25px,4.6vw,33px);line-height:1.18;letter-spacing:-.005em}
+h1 em{font-style:italic;color:var(--sand)}
+.help{color:var(--ink2);font-size:14.5px;margin-top:10px}
+.field{margin-top:24px;display:flex;flex-direction:column;gap:10px}
+
+.opt{display:flex;align-items:center;gap:12px;padding:15px 16px;border-radius:18px;cursor:pointer;border:1px solid var(--line);background:var(--glass);color:var(--ink);font:500 15px Manrope,sans-serif;text-align:left;transition:background .2s,border-color .2s,transform .15s}
+.opt:hover{background:var(--glass2)}
+.opt:active{transform:scale(.99)}
+.opt .box{flex:none;width:22px;height:22px;border-radius:50%;border:1.6px solid var(--ink3);display:grid;place-items:center;transition:.2s}
+.opt.multi .box{border-radius:7px}
+.opt.on{border-color:var(--line2);background:linear-gradient(135deg,rgba(246,211,161,.24),rgba(233,119,95,.14))}
+.opt.on .box{border-color:transparent;background:linear-gradient(135deg,var(--sand),var(--amber))}
+.opt.on .box::after{content:"";width:9px;height:5px;border:solid #3a2016;border-width:0 0 2px 2px;transform:rotate(-45deg) translate(1px,-1px)}
+.opt small{display:block;color:var(--ink3);font-size:12.5px;font-weight:400}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:420px){.grid2{grid-template-columns:1fr}}
+
+input[type=text],input[type=email],textarea{width:100%;padding:16px 18px;border-radius:18px;border:1px solid var(--line);background:rgba(20,12,8,.35);color:var(--ink);font:500 16px Manrope,sans-serif;outline:none;transition:border-color .2s,box-shadow .2s}
+textarea{min-height:130px;resize:vertical;line-height:1.5}
+input:focus,textarea:focus{border-color:var(--sand);box-shadow:0 0 0 4px rgba(246,211,161,.14)}
+::placeholder{color:#8f7867}
+.other{margin-top:4px}
+
+.nav{display:flex;gap:10px;margin-top:auto;padding-top:28px;align-items:center}
+.btn{height:54px;padding:0 26px;border:0;border-radius:18px;font:700 15px Manrope,sans-serif;cursor:pointer;transition:opacity .2s,transform .15s}
+.btn:active{transform:scale(.98)}
+.next{flex:1;color:#3a2016;background:linear-gradient(135deg,var(--sand),var(--amber) 55%,var(--coral));box-shadow:0 12px 30px -12px var(--amber),inset 0 1px 0 rgba(255,255,255,.5)}
+.next:disabled{opacity:.4;cursor:not-allowed;box-shadow:none}
+.back{background:var(--glass);color:var(--ink2);border:1px solid var(--line);width:54px;padding:0;font-size:20px}
+.skip{background:none;border:0;color:var(--ink3);font:500 13px Manrope,sans-serif;cursor:pointer;text-decoration:underline;text-underline-offset:3px;padding:8px}
+.hint{font-size:12px;color:var(--ink3);text-align:center;margin-top:12px}
+.saved{position:fixed;bottom:16px;left:50%;transform:translateX(-50%) translateY(20px);opacity:0;transition:.35s;font-size:12.5px;padding:8px 14px;border-radius:999px;background:rgba(40,26,19,.9);border:1px solid var(--line);color:var(--ink2);z-index:60}
+.saved.show{opacity:1;transform:translateX(-50%)}
+.intro p{color:var(--ink2);margin-top:14px}
+.intro ul{list-style:none;margin-top:22px;display:grid;gap:10px}
+.intro li{display:flex;gap:12px;align-items:center;color:var(--ink2);font-size:14.5px}
+.intro li span{flex:none;width:30px;height:30px;border-radius:10px;display:grid;place-items:center;background:rgba(246,211,161,.14);color:var(--sand);font-size:14px}
+a{color:var(--sand)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="orbs"><i></i><i></i><i></i></div>
+<div class="shell">
+  <div class="top">
+    <div class="brand">Ponti'Com</div>
+    <div class="bar"><span id="bar"></span></div>
+    <div class="count" id="count"></div>
+  </div>
+  <div class="card"><div class="q" id="q"></div>
+    <div class="nav">
+      <button class="btn back" id="back" aria-label="Question précédente">←</button>
+      <button class="btn next" id="next">Continuer</button>
+    </div>
+    <div style="text-align:center"><button class="skip" id="skip">Je ne sais pas encore, question suivante</button></div>
+  </div>
+  <div class="hint">Vos réponses sont enregistrées à chaque étape. Vous pouvez fermer et revenir plus tard sur le même appareil.</div>
+</div>
+<div class="saved" id="saved">✓ Enregistré</div>
+
+<script>
+(function(){
+  var SUPA_URL = "https://afhtitjcwnlmjqkkmtmr.supabase.co/rest/v1/kereneur_reponses";
+  var SUPA_KEY = "sb_publishable_E9YJJOGvkyVJloqA_AaNaw_uoR2tPXe";
+  var LS = "kereneur_q_v1";
+
+  // type : intro | single | multi | text | long | end
+  // when : fonction(answers) -> bool (question conditionnelle)
+  var STEPS = [
+    {id:"intro", type:"intro"},
+    {id:"qui", chap:"Pour commencer", type:"single", q:"Qui répond à ce questionnaire ?",
+      opts:["Marion","Manon","Les deux, ensemble"]},
+
+    // LE LIEU
+    {id:"nom_lieu", chap:"Le lieu", type:"text", q:"Le lieu a-t-il déjà un nom ?", help:"Même provisoire, ou plusieurs pistes. Laissez vide si rien n'est décidé.", ph:"Ex. : Maison Ambre, ou deux ou trois idées"},
+    {id:"espaces", chap:"Le lieu", type:"single", q:"Combien d'espaces pourra-t-on <em>réserver</em> séparément ?", help:"Une salle de cours, une salle privée, un studio, etc.",
+      opts:["Un seul","Deux","Trois","Quatre ou plus"]},
+    {id:"espaces_detail", chap:"Le lieu", type:"long", q:"Décrivez chaque espace en une ligne.", help:"Son nom (même provisoire), sa taille approximative, ce qui s'y passera.", ph:"Salle 1 : 40 m², 4 barres de pole, cours collectifs\nSalle 2 : …"},
+    {id:"ouverture", chap:"Le lieu", type:"single", q:"Quand le lieu accueillera-t-il ses premiers clients ?",
+      opts:["C'est déjà le cas","D'ici 3 mois","Dans 3 à 6 mois","Plus tard","Pas encore fixé"]},
+
+    // ACTIVITÉS
+    {id:"activites", chap:"Ce qui s'y passe", type:"multi", q:"Quelles activités imaginez-vous dans le lieu ?", help:"Cochez tout ce qui est envisagé, même lointain.",
+      opts:["Pole dance","Autres danses","Yoga, stretching, mobilité","Renforcement, fitness","Tatouage","Soins, esthétique, bien-être","Privatisation (anniversaires, EVJF…)","Shootings photo ou vidéo","Soirées, événements, workshops"], other:true},
+    {id:"encadrement", chap:"Ce qui s'y passe", type:"single", q:"Qui fera vivre ces activités ?",
+      opts:[{t:"Uniquement nous deux",s:"Marion et Manon"},{t:"Nous, plus des intervenants indépendants",s:"profs, tatoueuse, praticiens…"},{t:"Surtout des intervenants qui louent l'espace",s:""}]},
+    {id:"intervenants_modele", chap:"Ce qui s'y passe", type:"multi", q:"Comment travaillez-vous avec les intervenants ?", help:"Plusieurs réponses possibles selon les personnes.",
+      when:function(a){return a.encadrement && a.encadrement.indexOf("Uniquement")<0},
+      opts:["Ils paient une location de l'espace (à l'heure, au mois)","Vous prenez un pourcentage sur leurs séances","Leurs clients vous paient, et vous les rémunérez","Pas encore défini"], other:true},
+    {id:"intervenants_nb", chap:"Ce qui s'y passe", type:"single", q:"Combien d'intervenants, à terme ?",
+      when:function(a){return a.encadrement && a.encadrement.indexOf("Uniquement")<0},
+      opts:["1 ou 2","3 à 5","6 à 10","Plus de 10"]},
+
+    // RÉSERVATION
+    {id:"formules", chap:"Réserver", type:"multi", q:"Qu'est-ce qu'un client pourra acheter ou réserver ?",
+      opts:["Un cours à l'unité","Un carnet de séances (5, 10…)","Un abonnement mensuel","Un cours d'essai","Un cours privé","Un espace à l'heure","Une carte cadeau","Un stage ou un workshop"], other:true},
+    {id:"resa_actuelle", chap:"Réserver", type:"multi", q:"Aujourd'hui, comment les gens réservent-ils ?",
+      opts:["Par DM Instagram","Par WhatsApp","Par téléphone ou SMS","Via une application de réservation","Sur place"], other:true},
+    {id:"volume", chap:"Réserver", type:"text", q:"Combien de réservations par semaine, environ ?", help:"Aujourd'hui, puis ce que vous visez dans un an.", ph:"Ex. : 30 aujourd'hui, 120 dans un an"},
+    {id:"annulation", chap:"Réserver", type:"single", q:"Quand un client annule tard ou ne vient pas, que souhaitez-vous ?",
+      opts:[{t:"Annulation libre jusqu'à 24 h avant",s:"après, la séance est due"},{t:"Annulation libre jusqu'à 12 h avant",s:""},{t:"Pas de remboursement, mais un report possible",s:""},{t:"On en parle ensemble",s:"je vous montrerai ce que font les meilleurs studios"}]},
+    {id:"paiement", chap:"Réserver", type:"single", q:"Le paiement se fait plutôt…",
+      opts:["En ligne, au moment de réserver","Sur place","Les deux, au choix du client"]},
+    {id:"paiement_place", chap:"Réserver", type:"multi", q:"Et sur place, aujourd'hui, vous encaissez comment ?",
+      opts:["Carte bancaire (terminal)","Espèces","Virement","Chèque","Rien pour l'instant"]},
+    {id:"rappels", chap:"Réserver", type:"multi", q:"Quelles attentions automatiques vous plairaient ?",
+      opts:["Rappel la veille du cours","Liste d'attente : la place libérée est proposée automatiquement","Message de bienvenue après la première séance","Relance des clients qui ne viennent plus","Demande d'avis Google après quelques séances","Cadeau d'anniversaire"]},
+
+    // INSTAGRAM
+    {id:"insta_comptes", chap:"Instagram", type:"text", q:"Quels comptes Instagram sont concernés ?", ph:"@… , @…"},
+    {id:"insta_type", chap:"Instagram", type:"single", q:"Ces comptes sont-ils des comptes professionnels ?", help:"Dans Instagram : Paramètres, puis Type de compte. Un compte professionnel est indispensable pour automatiser les messages.",
+      opts:["Oui, professionnel (entreprise ou créateur)","Non, compte personnel","Je ne sais pas"]},
+    {id:"insta_dm", chap:"Instagram", type:"single", q:"Quelqu'un écrit « dispo samedi ? » en DM. Que devrait-il se passer ?",
+      opts:[{t:"Réponse immédiate avec les créneaux libres et un lien pour réserver",s:"vous n'avez rien à faire"},{t:"Pareil, mais je peux reprendre la main à tout moment",s:""},{t:"Juste ranger et prioriser les messages, je réponds moi-même",s:""},{t:"Je ne sais pas, conseillez-moi",s:""}]},
+    {id:"canaux", chap:"Instagram", type:"multi", q:"D'autres canaux comptent-ils pour vous ?",
+      opts:["WhatsApp","Facebook","TikTok","Google (fiche d'établissement)","Site internet","Aucun autre"]},
+
+    // AMBIANCES
+    {id:"pilotage", chap:"Les ambiances", type:"multi", q:"Qu'aimeriez-vous pouvoir piloter dans le lieu ?",
+      opts:["Lumières : couleurs et intensité","Musique, salle par salle","Climatisation","Rideaux, volets, stores","Écran ou vidéoprojecteur","Ouverture de la porte","Caméras","Diffuseur de parfum"], other:true},
+    {id:"choix_ambiance", chap:"Les ambiances", type:"single", q:"Le client choisit-il lui-même son ambiance ?",
+      opts:[{t:"Oui, au moment de réserver",s:"comme dans le prototype"},{t:"Oui, sur place, avec une tablette dans la salle",s:""},{t:"Seulement pour les formules premium ou les privatisations",s:""},{t:"Non, c'est nous qui décidons",s:""}]},
+    {id:"matin", chap:"Les ambiances", type:"multi", q:"« Tout allumer depuis chez moi le matin » : à quoi cela vous servirait-il le plus ?", help:"Pour bien comprendre votre journée type.",
+      opts:["Que la salle soit déjà fraîche (clim) en arrivant","Vérifier que tout a bien été éteint la veille","Ouvrir la porte à quelqu'un à distance","Lancer une ambiance avant l'arrivée d'un client","Voir qui est là, ce qui est allumé"], other:true},
+    {id:"existant", chap:"Les ambiances", type:"long", q:"Qu'est-ce qui est déjà installé ou acheté ?", help:"Internet (fibre, 4G), box, marque des clims, enceintes, éclairages… Même approximatif. Une photo du tableau électrique et de la box nous aidera plus tard.", ph:"Ex. : fibre Orange, 2 clims Daikin, néons LED blancs, rien d'autre"},
+    {id:"bricoleur", chap:"Les ambiances", type:"text", q:"La personne qui s'y connaît en domotique utilise déjà quoi ?", help:"Son prénom, et ses outils s'il en a (Home Assistant, Jeedom, Google Home, Alexa, Zigbee…). Il sera nos mains sur place.", ph:"Ex. : Kévin, Home Assistant sur un Raspberry"},
+    {id:"budget_materiel", chap:"Les ambiances", type:"single", q:"Pour le matériel (lumières, son, réseau, serrure), vous imaginez plutôt…",
+      opts:["Moins de 1 500 €","1 500 à 4 000 €","4 000 à 8 000 €","Plus de 8 000 €","Aucune idée, je préfère une proposition"]},
+
+    // ACCÈS
+    {id:"acces", chap:"Entrer dans le lieu", type:"single", q:"Comment les gens entrent-ils dans le lieu ?",
+      opts:[{t:"Quelqu'un est toujours là pour ouvrir",s:""},{t:"Les intervenants doivent pouvoir entrer seuls",s:""},{t:"Les clients aussi, en autonomie",s:"accès 24 h sur 24 ou en horaires étendus"}]},
+    {id:"acces_code", chap:"Entrer dans le lieu", type:"single", q:"Sans badge : que pensez-vous d'un code à 4 chiffres reçu avec la réservation ?", help:"Il n'est valable que pendant le créneau réservé. Rien à oublier, et s'il est partagé, il expire tout seul.",
+      opts:["Parfait","Je préfère ouvrir depuis le téléphone (bouton dans l'app)","Les deux","J'ai une autre idée"]},
+
+    // BOUTIQUE (dérobée)
+    {id:"achats", chap:"Autour des séances", type:"multi", q:"En dehors des réservations, que pourrait-on acheter chez vous ?",
+      opts:["Tenues (Pontipole…)","Accessoires : grip, genouillères, chaussures…","Boissons, snacks sur place","Produits de soin (après-tatouage…)","Cartes cadeaux","Rien pour l'instant"], other:true},
+    {id:"achats_ou", chap:"Autour des séances", type:"single", q:"Et ces achats se feraient…",
+      when:function(a){return a.achats && !(a.achats.length===1 && a.achats[0]==="Rien pour l'instant")},
+      opts:["Sur place uniquement","En ligne, avec retrait sur place","En ligne, avec livraison","Partout"]},
+
+    // IMAGE
+    {id:"mots", chap:"L'image", type:"text", q:"Trois mots pour l'ambiance du lieu ?", ph:"Ex. : chaleureux, intime, spectaculaire"},
+    {id:"references", chap:"L'image", type:"long", q:"Des lieux, comptes ou applications que vous trouvez beaux ?", help:"Liens Instagram, sites, applications… Et ce qu'il faut absolument éviter.", ph:"J'adore… / Surtout pas…"},
+    {id:"charte", chap:"L'image", type:"single", q:"Avez-vous déjà un logo ou des couleurs ?",
+      opts:["Oui, tout est prêt","Quelques éléments","Rien encore","Un graphiste s'en occupe"]},
+
+    // CADRE
+    {id:"structure", chap:"Le cadre", type:"single", q:"Sous quelle forme le lieu va-t-il fonctionner ?", help:"C'est elle qui encaissera les paiements en ligne et recevra les factures.",
+      opts:["Une société (créée ou en création)","Une association","Chacune avec son statut actuel","Pas encore décidé"]},
+    {id:"equipe_bo", chap:"Le cadre", type:"single", q:"Combien de personnes géreront le planning et les réservations ?",
+      opts:["Une","Deux","Trois à cinq","Plus"]},
+    {id:"lancement", chap:"Le cadre", type:"single", q:"Pour quand aimeriez-vous l'application ?",
+      opts:["Le plus vite possible","Pour l'ouverture du lieu","D'ici 3 mois","Pas de date précise"]},
+    {id:"budget_app", chap:"Le cadre", type:"single", q:"Pour l'application elle-même, vous avez une enveloppe en tête ?", help:"Simplement pour adapter la proposition. Tout se fera par étapes.",
+      opts:["Je préfère recevoir une proposition","Moins de 5 000 €","5 000 à 10 000 €","10 000 à 20 000 €","Plus de 20 000 €"]},
+    {id:"contact", chap:"Pour finir", type:"text", q:"Où vous envoyer la proposition ?", help:"Une adresse e-mail.", ph:"vous@exemple.fr", input:"email"},
+    {id:"libre", chap:"Pour finir", type:"long", q:"Quelque chose que nous n'avons pas abordé ?", help:"Une envie, une crainte, une idée folle : tout est bienvenu.", ph:"…"},
+    {id:"end", type:"end"}
+  ];
+
+  var st = load() || {sid: uid(), i: 0, a: {}};
+  var q = document.getElementById("q"), next = document.getElementById("next"), back = document.getElementById("back"), skip = document.getElementById("skip");
+
+  function uid(){ return "k-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2,8) }
+  function load(){ try{ return JSON.parse(localStorage.getItem(LS)) }catch(e){ return null } }
+  function save(){ try{ localStorage.setItem(LS, JSON.stringify(st)) }catch(e){} }
+  function visible(i){ var s = STEPS[i]; return !s.when || s.when(st.a) }
+  function esc(t){ return String(t).replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c] }) }
+  function questionSteps(){ return STEPS.filter(function(s,i){ return s.q && visible(i) }) }
+
+  function send(step, value){
+    var el = document.getElementById("saved");
+    fetch(SUPA_URL, {method:"POST",
+      headers:{"apikey":SUPA_KEY,"Authorization":"Bearer "+SUPA_KEY,"Content-Type":"application/json","Prefer":"return=minimal"},
+      body: JSON.stringify({session_id: st.sid, etape: step, reponses: {valeur: value, qui: st.a.qui || null}, user_agent: navigator.userAgent.slice(0,400)})
+    }).then(function(r){ if(r.ok){ el.classList.add("show"); setTimeout(function(){ el.classList.remove("show") }, 1300) } }).catch(function(){});
+  }
+
+  function progress(){
+    var qs = questionSteps(), cur = STEPS[st.i], idx = qs.indexOf(cur);
+    var pct = cur.type === "end" ? 100 : cur.type === "intro" ? 0 : Math.round(idx / qs.length * 100);
+    document.getElementById("bar").style.width = pct + "%";
+    document.getElementById("count").textContent = cur.q ? (idx + 1) + " / " + qs.length : "";
+    var o = document.querySelectorAll(".orbs i");
+    o[0].style.transform = "translate(" + pct*1.2 + "px," + pct*.8 + "px)";
+    o[1].style.transform = "translate(" + (-pct) + "px," + (-pct*.6) + "px)";
+  }
+
+  function optLabel(o){ return typeof o === "string" ? o : o.t }
+
+  function render(){
+    var s = STEPS[st.i], v = st.a[s.id], html = "";
+    skip.style.display = s.q ? "" : "none";
+    back.style.visibility = st.i > 0 && s.type !== "end" ? "visible" : "hidden";
+    next.style.display = "";
+    next.textContent = "Continuer";
+
+    if(s.type === "intro"){
+      html = '<div class="intro"><div class="chap">Votre projet</div><h1>Marion, Manon : construisons <em>votre lieu</em>, une question à la fois.</h1>'
+        + '<p>Environ 10 minutes. Pas de bonne ou de mauvaise réponse : « je ne sais pas encore » est une réponse utile.</p>'
+        + '<ul><li><span>✦</span>Une seule question par écran</li><li><span>↺</span>Vous pouvez revenir en arrière</li><li><span>✓</span>Tout est enregistré au fur et à mesure</li></ul>'
+        + '<p style="font-size:13.5px;margin-top:22px">Pas encore vu le prototype ? <a href="../prototype/">Il est ici</a>.</p></div>';
+      next.textContent = st.i === 0 && Object.keys(st.a).length ? "Reprendre où j'en étais" : "Commencer";
+    } else if(s.type === "end"){
+      html = '<div class="intro"><div class="chap">Merci</div><h1>C’est parfait, <em>merci</em>.</h1>'
+        + '<p>J’ai tout ce qu’il faut pour préparer une proposition claire, par étapes. Je reviens vers vous très vite pour en parler en visio.</p>'
+        + '<p style="margin-top:18px">Alexis · Ponti’Com</p></div>';
+      next.style.display = "none";
+      send("_termine", true);
+    } else {
+      html = '<div class="chap">' + esc(s.chap) + '</div><h1>' + s.q + '</h1>' + (s.help ? '<p class="help">' + esc(s.help) + '</p>' : '') + '<div class="field" id="f"></div>';
+    }
+    q.innerHTML = html;
+    q.style.animation = "none"; q.offsetHeight; q.style.animation = "";
+
+    var f = document.getElementById("f");
+    if(s.type === "single" || s.type === "multi"){
+      var multi = s.type === "multi", list = s.opts.slice(), wrap = f;
+      if(list.length > 6 && !list.some(function(o){ return typeof o !== "string" })){ wrap = document.createElement("div"); wrap.className = "grid2"; f.appendChild(wrap) }
+      var cur = multi ? (v && v.choix ? v.choix : []) : (v && v.choix ? v.choix : null);
+      list.forEach(function(o){
+        var lab = optLabel(o), b = document.createElement("button");
+        b.type = "button"; b.className = "opt" + (multi ? " multi" : "");
+        var on = multi ? cur.indexOf(lab) >= 0 : cur === lab;
+        if(on) b.classList.add("on");
+        b.innerHTML = '<span class="box"></span><span>' + esc(lab) + (o.s ? '<small>' + esc(o.s) + '</small>' : '') + '</span>';
+        b.onclick = function(){
+          if(multi){
+            var arr = (st.a[s.id] && st.a[s.id].choix) ? st.a[s.id].choix.slice() : [];
+            var k = arr.indexOf(lab); if(k >= 0) arr.splice(k,1); else arr.push(lab);
+            st.a[s.id] = {choix: arr, autre: (st.a[s.id]||{}).autre || ""}; b.classList.toggle("on");
+          } else {
+            st.a[s.id] = {choix: lab, autre: (st.a[s.id]||{}).autre || ""};
+            f.querySelectorAll(".opt").forEach(function(x){ x.classList.remove("on") }); b.classList.add("on");
+            if(!s.other){ save(); setTimeout(go, 280) }
+          }
+          save(); validate();
+        };
+        wrap.appendChild(b);
+      });
+      if(s.other){
+        var inp = document.createElement("input"); inp.type = "text"; inp.className = "other"; inp.placeholder = "Autre chose ? Précisez ici";
+        inp.value = (v && v.autre) || "";
+        inp.oninput = function(){ var cur2 = st.a[s.id] || {choix: multi ? [] : null}; cur2.autre = inp.value; st.a[s.id] = cur2; save(); validate() };
+        f.appendChild(inp);
+      }
+    }
+    if(s.type === "text" || s.type === "long"){
+      var t = document.createElement(s.type === "long" ? "textarea" : "input");
+      if(s.type === "text") t.type = s.input || "text";
+      t.placeholder = s.ph || ""; t.value = typeof v === "string" ? v : "";
+      t.oninput = function(){ st.a[s.id] = t.value; save(); validate() };
+      if(s.type === "text") t.onkeydown = function(e){ if(e.key === "Enter" && !next.disabled) go() };
+      f.appendChild(t);
+      setTimeout(function(){ if(window.innerWidth > 700) t.focus() }, 350);
+    }
+    progress(); validate();
+  }
+
+  function filled(s){
+    var v = st.a[s.id];
+    if(s.type === "intro" || s.type === "end") return true;
+    if(s.type === "text" || s.type === "long") return !!(v && v.trim());
+    if(!v) return false;
+    if(s.type === "multi") return (v.choix && v.choix.length) || (v.autre && v.autre.trim());
+    return !!v.choix || (v.autre && v.autre.trim());
+  }
+  function validate(){ next.disabled = !filled(STEPS[st.i]) }
+
+  function go(skipped){
+    var s = STEPS[st.i];
+    if(s.q) send(s.id, skipped ? "(je ne sais pas encore)" : st.a[s.id]);
+    if(skipped && s.q) st.a[s.id] = st.a[s.id] || "";
+    var n = st.i + 1; while(n < STEPS.length - 1 && !visible(n)) n++;
+    st.i = n; save(); render(); window.scrollTo({top:0, behavior:"smooth"});
+  }
+  next.onclick = function(){ if(!next.disabled) go(false) };
+  skip.onclick = function(){ go(true) };
+  back.onclick = function(){ var p = st.i - 1; while(p > 0 && !visible(p)) p--; st.i = Math.max(0,p); save(); render() };
+
+  if(st.i > 0 && STEPS[st.i].type !== "end"){ st.i = 0 } // écran d'accueil avec « Reprendre »
+  var resumeTo = null;
+  if(Object.keys(st.a).length){ var last = 0; STEPS.forEach(function(s,i){ if(st.a[s.id] !== undefined) last = i }); resumeTo = Math.min(last + 1, STEPS.length - 1) }
+  var origGo = go;
+  next.onclick = function(){
+    if(next.disabled) return;
+    if(STEPS[st.i].type === "intro" && resumeTo){ st.i = resumeTo; resumeTo = null; while(st.i < STEPS.length - 1 && !visible(st.i)) st.i++; save(); render(); return }
+    origGo(false);
+  };
+  render();
+})();
+</script>
+</body>
+</html>
