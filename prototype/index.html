@@ -184,6 +184,31 @@ section{padding:90px 0}
 .honest{margin-top:22px;padding:20px 22px;font-size:14.5px;color:var(--ink2)}
 .honest b{color:var(--ink)}
 
+
+/* duo vivant app des stores / PWA */
+.duo-head{text-align:center;max-width:680px;margin:70px auto 0}
+.duo-head h3{font-family:Fraunces,serif;font-weight:400;font-size:clamp(24px,3.2vw,34px);line-height:1.15}
+.duo-head h3 em{font-style:italic;color:var(--sand)}
+.duo-head p{color:var(--ink2);margin-top:10px}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:44px;margin:40px auto 0;max-width:820px}
+@media (max-width:760px){.duo{grid-template-columns:1fr;gap:60px}}
+.duo .col{display:flex;flex-direction:column;align-items:center}
+.duo .phone{width:min(310px,100%)}
+.duo .lbl{margin-bottom:18px;text-align:center}
+.duo .lbl b{display:block;font-family:Fraunces,serif;font-weight:500;font-size:21px}
+.duo .lbl span{font-size:13px;color:var(--ink3)}
+.duo .lbl .real{display:none}
+.duo.shown .lbl .real{display:block}
+.duo.shown .lbl .ab{display:none}
+.duo .diff{width:min(310px,100%);margin-top:24px;display:grid;gap:10px;opacity:.25;filter:blur(3px);transition:opacity .6s,filter .6s;pointer-events:none}
+.duo.shown .diff{opacity:1;filter:none;pointer-events:auto}
+.diff div{display:flex;gap:10px;font-size:13.5px;color:var(--ink2);padding:12px 14px;border-radius:16px;background:var(--glass);border:1px solid var(--line);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.diff b{color:var(--ink);font-weight:600}
+.diff .ico{flex:none;width:22px;height:22px;border-radius:7px;display:grid;place-items:center;font-size:12px;background:rgba(246,211,161,.16);color:var(--sand)}
+.diff .ico.no{background:rgba(233,119,95,.18);color:#ffb59c}
+.revealbtn{display:flex;margin:34px auto 0;padding:14px 24px;border-radius:18px;border:1px solid var(--line2);background:var(--glass2);color:var(--ink);font:700 15px Manrope,sans-serif;cursor:pointer;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.duo-out{text-align:center;color:var(--ink2);max-width:640px;margin:26px auto 50px;font-size:15.5px}
+.duo-out b{color:var(--ink)}
 .verdict{padding:36px 30px;text-align:center}
 .verdict p{color:var(--ink2);max-width:640px;margin:0 auto}
 .cta{display:inline-flex;align-items:center;gap:10px;margin-top:26px;padding:16px 26px;border-radius:20px;text-decoration:none;font-weight:700;color:#3a2016;background:linear-gradient(135deg,var(--sand),var(--amber) 55%,var(--coral));box-shadow:0 14px 34px -12px var(--amber)}
@@ -317,7 +342,40 @@ footer{padding:40px 0 60px;text-align:center;font-size:12.5px;color:var(--ink3)}
       <div class="twin"><div class="tile"><img src="../app/icon-192.png" alt=""></div><b>Ambre</b><span>Version A</span></div>
       <div class="twin"><div class="tile"><img src="../app/icon-192.png" alt=""></div><b>Ambre</b><span>Version B</span></div>
     </div>
-    <p class="reveal">Impossible à dire, et vos clientes ne se poseront jamais la question. La différence est ailleurs :</p>
+    <p class="reveal">Impossible à dire, et vos clientes ne se poseront jamais la question.</p>
+
+    <div class="duo-head">
+      <h3>Et une fois ouvertes ? <em>Toujours pareil.</em></h3>
+      <p>Les deux téléphones font tourner l'application. Réservez, changez d'ambiance, passez d'un onglet à l'autre, sur l'un puis sur l'autre.</p>
+    </div>
+    <div class="duo" id="duo">
+      <div class="col">
+        <div class="lbl"><b class="ab">Version A</b><b class="real">App des stores</b><span class="real">téléchargée depuis l'App Store</span></div>
+        <div class="phone"><div class="screen"><iframe src="../app/?demo=1" title="Ambre"></iframe><div class="sbar"><span>19:02</span><span class="ic"><svg viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5" width="3" height="7" rx="1"/><rect x="10" y="2.5" width="3" height="9.5" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg><svg viewBox="0 0 16 12"><path d="M8 2.2c2.4 0 4.6.9 6.2 2.5l1.3-1.3A10.6 10.6 0 0 0 8 .3 10.6 10.6 0 0 0 .5 3.4l1.3 1.3A8.7 8.7 0 0 1 8 2.2zm0 3.7c1.4 0 2.7.5 3.6 1.4l1.3-1.3A7 7 0 0 0 8 4a7 7 0 0 0-4.9 2l1.3 1.3c1-.9 2.2-1.4 3.6-1.4zM8 9.5l2-2a2.9 2.9 0 0 0-4 0z"/></svg><svg viewBox="0 0 27 12"><rect x=".5" y=".5" width="22" height="11" rx="3" fill="none" stroke="#fff" stroke-opacity=".5"/><rect x="2" y="2" width="16" height="8" rx="1.8"/><rect x="24" y="4" width="2" height="4" rx="1" opacity=".5"/></svg></span></div>
+          <div class="island"></div><div class="homeind"></div></div></div>
+        <div class="diff">
+          <div><span class="ico">✓</span><span><b>Plein écran</b>, icône, notifications, Apple Pay.</span></div>
+          <div><span class="ico">✓</span><span><b>Visible dans l'App Store</b> et Google Play.</span></div>
+          <div><span class="ico no">✕</span><span>Il faut <b>chercher puis télécharger</b> avant la première réservation.</span></div>
+          <div><span class="ico no">✕</span><span>Chaque mise à jour passe par <b>la validation d'Apple et de Google</b>.</span></div>
+          <div><span class="ico no">✕</span><span><b>Deux applications</b> à développer et à faire vivre (iPhone et Android).</span></div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="lbl"><b class="ab">Version B</b><b class="real">PWA · notre choix</b><span class="real">ajoutée depuis un lien Instagram</span></div>
+        <div class="phone"><div class="screen"><iframe src="../app/?demo=1" title="Ambre"></iframe><div class="sbar"><span>19:02</span><span class="ic"><svg viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5" width="3" height="7" rx="1"/><rect x="10" y="2.5" width="3" height="9.5" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg><svg viewBox="0 0 16 12"><path d="M8 2.2c2.4 0 4.6.9 6.2 2.5l1.3-1.3A10.6 10.6 0 0 0 8 .3 10.6 10.6 0 0 0 .5 3.4l1.3 1.3A8.7 8.7 0 0 1 8 2.2zm0 3.7c1.4 0 2.7.5 3.6 1.4l1.3-1.3A7 7 0 0 0 8 4a7 7 0 0 0-4.9 2l1.3 1.3c1-.9 2.2-1.4 3.6-1.4zM8 9.5l2-2a2.9 2.9 0 0 0-4 0z"/></svg><svg viewBox="0 0 27 12"><rect x=".5" y=".5" width="22" height="11" rx="3" fill="none" stroke="#fff" stroke-opacity=".5"/><rect x="2" y="2" width="16" height="8" rx="1.8"/><rect x="24" y="4" width="2" height="4" rx="1" opacity=".5"/></svg></span></div>
+          <div class="island"></div><div class="homeind"></div></div></div>
+        <div class="diff">
+          <div><span class="ico">✓</span><span><b>Plein écran</b>, icône, notifications, Apple Pay : pareil.</span></div>
+          <div><span class="ico">✓</span><span><b>Un lien en DM</b> et la cliente réserve tout de suite, avant même d'installer.</span></div>
+          <div><span class="ico">✓</span><span>Mises à jour <b>le jour même</b>, pour tout le monde.</span></div>
+          <div><span class="ico">✓</span><span><b>Une seule application</b> : iPhone, Android, ordinateur.</span></div>
+          <div><span class="ico no">✕</span><span>Pas de fiche dans l'App Store. Vos clientes arrivent par Instagram.</span></div>
+        </div>
+      </div>
+    </div>
+    <button class="revealbtn" id="revealBtn">Révéler laquelle est laquelle</button>
+    <p class="duo-out">Pour vos clientes, <b>l'expérience est la même</b>. La différence se joue avant, pour les trouver et les faire réserver, et après, pour faire évoluer l'application. C'est là que la PWA gagne :</p>
 
     <div class="table g">
       <div class="tr h"><div></div><div>App des stores</div><div class="pwa">PWA · notre choix</div></div>
@@ -352,6 +410,10 @@ footer{padding:40px 0 60px;text-align:center;font-size:12.5px;color:var(--ink3)}
   function ping(){ notif.classList.add("on"); setTimeout(function(){ notif.classList.remove("on") }, 4200) }
   setTimeout(ping, 3500); setInterval(ping, 20000);
 
+
+  // duo app des stores / PWA
+  var duo = document.getElementById("duo");
+  document.getElementById("revealBtn").onclick = function(){ var on = duo.classList.toggle("shown"); this.textContent = on ? "Masquer la réponse" : "Révéler laquelle est laquelle" };
   // ------- animation d'installation -------
   var demo = document.getElementById("demo"), finger = document.getElementById("finger");
   var steps = document.querySelectorAll("#steps li");
