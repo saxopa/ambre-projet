@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Le Complexe · Prototype</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#1c120d">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Le Complexe">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="../app/icon-192.png">
+<link rel="apple-touch-icon" href="../app/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;1,9..144,300&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="orbs" aria-hidden="true"><i></i><i></i><i></i></div>
+
+<div class="stage">
+  <aside class="side side-l">
+    <div class="kicker">Prototype v2 · données fictives</div>
+    <h1>Le Complexe</h1>
+    <p class="lead">Une seule application, trois rôles. Changez de rôle en haut de l'écran : ce que vous faites d'un côté se voit de l'autre.</p>
+    <div class="howto g" id="howto"></div>
+  </aside>
+
+  <div class="device-wrap">
+    <div class="switcher g" id="switcher">
+      <div class="seg" role="tablist">
+        <button data-role="owner">Propriétaire</button>
+        <button data-role="pro">Pro</button>
+        <button data-role="client">Cliente</button>
+      </div>
+      <select id="who" aria-label="Voir comme"></select>
+      <button class="reset" id="reset" title="Réinitialiser la démo" aria-label="Réinitialiser la démo">↺</button>
+    </div>
+    <div class="device" id="device">
+      <div class="glow" aria-hidden="true"></div>
+      <main class="scr" id="scr"></main>
+      <nav class="tabbar" id="tabbar"></nav>
+    </div>
+  </div>
+
+  <aside class="side side-r">
+    <div class="g note">
+      <b>Ce qui est simulé</b>
+      <p>Les paiements, les e-mails et la domotique sont simulés. Les données restent dans ce navigateur. En production, chaque droit est vérifié par le serveur.</p>
+    </div>
+    <div class="g note">
+      <b>À voir aussi</b>
+      <p><a href="../prototype/">La PWA et son installation</a><br><a href="../questionnaire/">Le questionnaire</a></p>
+    </div>
+  </aside>
+</div>
+
+<dialog class="sheet" id="sheet"><div class="grab"></div><div id="sheetBody"></div></dialog>
+<div class="toast" id="toast" popover="manual"></div>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>

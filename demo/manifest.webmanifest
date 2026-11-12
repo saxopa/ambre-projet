@@ -1,0 +1,13 @@
+{
+  "name": "Le Complexe",
+  "short_name": "Le Complexe",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#1c120d",
+  "theme_color": "#1c120d",
+  "icons": [
+    { "src": "../app/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "../app/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
